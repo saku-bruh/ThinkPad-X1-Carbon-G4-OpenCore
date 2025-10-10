@@ -27,30 +27,42 @@ Initial Release<br/>
 | WLAN + Bluetooth | 802.11ac + BT, Intel® Dual Band Wireless-AC 8260                                                           |
 | Mobile Data      | Needs custom BIOS, hardware unknown & untested on macOS                                                    |
 | Ethernet         | Intel Ethernet Connection I219-LM (Jacksonville)                                                           |
-| Camera           | HD720p resolution, low light sensitive, fixed focus                                                        |
+| Camera           | HD 720p resolution, low light sensitive, fixed focus                                                        |
 | Audio support    | HD Audio, Conexant CX11852 codec, stereo speakers 1Wx2, dual array microphone, combo audio/microphone jack |
 | Keyboard         | 6-row, spill-resistant, multimedia Fn keys, LED backlight                                                  |
 | Battery          | Integrated Lithium Polymer 4-cell (52Wh)                                                                   |
 </details>
 
 ## EFI Status
+**READ BEFORE PROCEEDING WITH THE INSTALL!**
 
 <details>  
 <summary><strong>✅ What works?</strong></summary>
 </br>
 
-- [x] Wi-Fi & Bluetooth <br>(itlwm w/ HeliPort app, read post-install section)
-- [x] Audio <br>(Requires OCLP-mod for AppleHDA patching, read post-install section) 
-- [X] Built-in Microphone
-- [X] Brightness / Volume Control <br>(Don't go to the lowest brightness setting as this will make the display completely black)
+- [X] Means that the feature works out of the box
+
+- [ ] Means that the feature works *after tweaks* OR *with slight issues*, read the **Miscellaneous Notes** section below for more information
+
+- Means that the feature works depending on your *hardware / addon* configuration, read the **Miscellaneous Notes** section below for more information
+<br>
+
+- [ ] Wi-Fi & Bluetooth
+- [ ] Audio & Built-in Microphone
+- [ ] Brightness Control / Volume Control
 - [X] Battery
-- [X] USB Ports & Built-in Camera
-- [X] Graphics Acceleration (Read "What WON'T get fixed?" for more info)
-- [X] Trackpoint / Touchpad <br>(Gestures work, buggy when waking up from sleep after a very short period 1~2 minutes, read post-install section)
-- [X] FaceTime / iMessage (iServices)
-- [X] Sleep/Hibernation <br>(S3/S4 sleep, read post-install section)
-- [X] External Display Output(s) <br>(HDMI works, however mini DP is currently untested but it should work as the framebuffer accounts for it, con0 (LVDS), con1 (mini DP) and con2 (HDMI), these connectors were all cross-referenced via [*Hackintool*](https://github.com/benbaker76/Hackintool))
+- [X] Built-in Camera
+- [X] Graphics Acceleration
+
+- [ ] Trackpoint / Touchpad
+
+- [X] FaceTime / iMessage (incl. iServices)
+
+- [ ] Sleep / Hibernation
+
+- External Display Output(s) & USB Ports
 </details>
+<br>
 
 <details>
 <summary><strong>⚠️ What doesn't work?</strong></summary>
@@ -58,22 +70,38 @@ Initial Release<br/>
 
 - [ ] Continuity Features <br>(AirDrop, AirPlay, Handoff, etc. this is because we don't use AirportItlwm and there isn't any current patch available for Tahoe)
 </details>
+<br>
 
 <details>
 <summary><strong>❌ What WON'T get fixed?</strong></summary>
 </br>
 
-- Fingerprint Reader <br>(No kext to spoof Touch ID, also pretty sure it's tied to TPM which there isn't a kext for anyway as far as I know)
-- DRM, Consider it half broken, it does work on Apple Music (e.g. Loseless Audio), however Dolby Atmos, Safari DRM and TV+ don't seem able to work properly (If you don't even use Apple Music you may remove the `unfairvga=3` from `boot-args` for slightly better iGPU performance)
+- [ ] Fingerprint Reader <br>(No kext to spoof Touch ID, also pretty sure it's tied to TPM which there isn't a kext for anyway as far as I know)
+- [ ] DRM, Consider it half broken, it does work on Apple Music (e.g. Loseless Audio), however Dolby Atmos, Safari DRM and TV+ don't seem able to work properly (If you don't even use Apple Music you may remove the `unfairvga=3` from `boot-args` for slightly better iGPU performance)
 </details>
+<br>
 
 <details>
 <summary><strong>📋 Miscellaneous Notes</strong></summary>
 </br>
 
-- Fingerprint Reader doesn't work when booting into Windows from OpenCore (This also shows the TPM 2.0 module with *Code 10* in the Windows Device Manager, disabling Intel PTT might fix this haven't tested this yet)
-- The ThinkPad dock USB ports/display out ports aren't mapped since I don't have one you may follow the official [Dortania Guide Connector types patching guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html) (To fix the display outputs if they don't work) and use [USBMap](https://github.com/corpnewt/USBMap) (To map the missing USB ports)
+- About Wi-Fi & BT... <br>itlwm w/ HeliPort app, read the **Post-Install** section
 
+- About Audio & the Built-in Microphone... <br>Requires OCLP-mod for AppleHDA patching, read the **Post-Install** section
+
+- About the Display Brightness (Brightness Control)... <br>Don't go to the lowest brightness setting as this will make the display completely black, volume/mic control works as expected, just follow the *Enable Multimedia Keys, Fan Control & LEDs Control* section in the **Post-Install** section
+
+- About iGPU (Graphics Acceleration)... Read the *DRM* section under **What WON'T get fixed?** section if you'd like to slightly improve iGPU performance and *DON'T* use Apple Music
+
+- About the Trackpoint / Touchpad... <br>The trackpoint and pad is buggy when waking up from sleep after a very short period 1~2 minutes, read the **Post-Install** section to fix the gestures
+
+- About external display outputs... <br>HDMI works, however mini DP is currently untested but it should work as the framebuffer accounts for it, con0 (LVDS), con1 (mini DP) and con2 (HDMI), these connectors were all cross-referenced via [*Hackintool*](https://github.com/benbaker76/Hackintool)
+
+- About Sleep / Hibernation... <br>To get proper S3/S4 sleep working, read the **Post-Install** section
+
+- The ThinkPad dock USB ports/display out ports aren't mapped since I don't have one you may follow the official [Dortania Guide Connector types patching guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html) (To fix the display outputs if they don't work) and use [USBMap](https://github.com/corpnewt/USBMap) (To map the missing USB ports on the dock)
+
+- Fingerprint Reader doesn't work when booting into Windows from OpenCore (This also shows the TPM 2.0 module with *Code 10* in the Windows Device Manager, disabling Intel PTT might fix this haven't tested this yet)
 </details>
 
 # Installation<br/>
