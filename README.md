@@ -1,12 +1,15 @@
 # Lenovo ThinkPad X1 Carbon Gen 4 | OpenCore Configuation
 
-macOS Version: **26** | **Tahoe**
+macOS Version: **26.1** | **Tahoe**
 
-OpenCore Version: **1.0.6** | **08-10-2025**
+OpenCore Version: **1.0.7 BETA** | **23-11-2025**
 
 **This EFI is provided as-is and I will close any unrelated issues below the current official version that this EFI supports.**
 
 ![preview](https://github.com/saku-bruh/ThinkPad-X1-Carbon-G4-OpenCore/blob/main/Resources/README/preview.png)
+
+**23.11.2025:**<br/>
+Updated to OC 1.0.7 (Beta) and updated some docs links and the docs to better clarify some stuff<br/>
 
 **10.10.2025:**<br/>
 Initial Release<br/>
@@ -162,7 +165,7 @@ macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000000000 -os latest download
 <summary><strong>Fixing Wi-Fi with HeliPort</strong></summary>
 </br>
 
-1. Download [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases/download/v1.5.0/HeliPort.dmg)
+1. Download [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases/download/v2.0.0-alpha/HeliPort.dmg)
 2. Run the downloaded .dmg and then drag and drop HeliPort.app into the Applications folder
 3. Launch HeliPort from Spotlight/Applications folder in Finder
 4. Hold the *Option key* (*Windows* key) while clicking the HeliPort Wi-Fi icon
@@ -267,7 +270,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/mast
 
 2. Follow the instructions, then reboot
 
-[BetterDisplay method, haven't tested it yet](https://github.com/waydabber/BetterDisplay)
+You can also use [BetterDisplay](https://github.com/waydabber/BetterDisplay) for external monitors
 </details>
 
 <details>
@@ -307,16 +310,16 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/mast
 <summary><strong>How to update macOS</strong></summary>
 </br>
 
-**WARNING, NOT FULLY TESTED, RISK OF DATA LOSS AND/OR TOTAL INSTALL DESTRUCTION:** <br>I only tested this once before <br>(26.0 > 26.0.1 update and it resulted in a brick after re-applying the root patch for AppleHDA) and I didn't click the blue button (from OCLP-mod) during the OTA and didn't reboot once after updating, which probably broke the APFS seal, clicking the button and rebooting once should probably fix the issue I had and it might even auto-install the audio patch, however I reccommend waiting until your macOS version is supported by OCLP-mod so a mismatch doesn't happen, be **extremely** cautious and update at your own risk
+<br>Be **VERY** careful while updating as it is very easy brick your install, so you should probably have a Carbon Copy Cloner backup or something similar, I had to reinstall once due to the volume seal not re-applying correctly. To update without bricking (and using a lot of space) follow the steps below and proceed with caution
 
 1. Open OPLC-mod
 2. Click the 2nd button (top right corner)
 3. Click the 2nd button (You can use Google Lens to translate, it should say something like "Revert Root Patch")
 4. Wait for the process to finish
 5. Reboot when it asks you to
-6. Go to Settings, start the update and wait, at some point it will give you a prompt with a blue button and you should click that
-7. Wait for the process to finish the update fully, then login and then just reboot
-8. Re-apply the root patch (If it hasn't done so already)
+6. Go to Settings, start the update and wait
+7. Wait for the process to finish the update fully, then login and **MAKE SURE** you *reboot* before proceeding to **Step 8**
+8. Re-apply the root patch
 </details>
 
 
