@@ -4,7 +4,7 @@ macOS Version: **26.1** | **Tahoe**
 
 OpenCore Version: **1.0.7 BETA** | **23-11-2025**
 
-**This EFI is provided as-is and I will close any unrelated issues below the current official version that this EFI supports.**
+**This EFI is provided as-is and is now ABANDONED since I gave away the laptop and I switched to Apple Silicon.**
 
 ![preview](https://github.com/saku-bruh/ThinkPad-X1-Carbon-G4-OpenCore/blob/main/Resources/README/preview.png)
 
